@@ -3,6 +3,17 @@
 Class Api_db extends CI_MODEL {
 
   /**
+   * getAllCategorys
+   * @param string $sort
+   */
+  public function getAllCategorys($sort="ASC"){
+    $this->db->select('*', FALSE);
+		$this->db->from('category');
+		$this->db->order_by('name', $sort);
+		return $this->db->get()->result();
+  }
+
+  /**
    * getAllProducts
    * @param string $sort
    */

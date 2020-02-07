@@ -31,6 +31,28 @@ class Api extends REST_Controller {
   }
 
   /**
+   * showCategorys
+   * @method GET
+   * @param string sort
+   */
+  public function showCategorys_get()
+  {
+    try {
+      /* get all products */
+      $sortBy = $this->get('sort');
+      $get_records = $this->Api_db->getAllCategorys($sortBy);
+
+      if(count($get_records) > 0){
+        return $this->response(array("success" => true, "items" => $get_records), 200);
+      } else {
+        return $this->response(array("success" => false, "items" => []), 200);
+      }
+    } catch (Exception $e) {
+      return $this->response(array("success" => false, "msg" => $this->catch_message), 200);
+    }
+  }
+
+  /**
    * showProducts
    * @method GET
    * @param string sort
